@@ -83,7 +83,5 @@ public class Temperatura extends Sensor{
                     break;                 
             }
         }
-
     }
-
 }

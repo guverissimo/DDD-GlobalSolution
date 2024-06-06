@@ -40,6 +40,10 @@ public class Sensor {
         this.valorMaxSim = valorMaxSim;
     }
 
+    public void setValorAtual(Double valorAtual) {
+        this.valorAtual = valorAtual;
+    }
+
     public double calcularMedia() {
         double media;
         double soma = 0;
@@ -56,6 +60,8 @@ public class Sensor {
 
     public Double adicionarHistorico(Double valor){
         historico.add(valor);
+        setValorAtual(valor);
+        imprimeHistorico();
         return valor;
     }
 
@@ -75,7 +81,7 @@ public class Sensor {
 
         System.out.println("|      Horário     | Temperatura ");
         System.out.println("08:20:46.733815048 | 28");
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < historico.size(); i++){
             System.out.println(horaAtual +" | " + (int) Math.round(historico.get(i)) + " C");
 
             horaAtual = horaAtual.minusHours(1);

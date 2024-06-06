@@ -37,6 +37,4 @@ public class Helper {
     public void imprimeOpcao(String opcao){
         System.out.println("\u001B[34m " + opcao + " \u001B[0m");
     }
-
-//    public void imprimeErro()
 }

@@ -1,11 +1,13 @@
 package org.amigosdomar.monitoramento;
 
 import org.amigosdomar.helper.Helper;
+import org.amigosdomar.sensores.PH;
 import org.amigosdomar.sensores.Temperatura;
 import java.util.Scanner;
 
 public class Tanque {
     private Temperatura temperatura = new Temperatura();
+    private PH ph = new PH();
     private String nome;
     private double volume;
 
