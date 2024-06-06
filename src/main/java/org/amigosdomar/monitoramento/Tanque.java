@@ -2,10 +2,6 @@ package org.amigosdomar.monitoramento;
 
 import org.amigosdomar.helper.Helper;
 import org.amigosdomar.sensores.Temperatura;
-
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Tanque {
@@ -62,7 +58,7 @@ public class Tanque {
             System.out.println("** Escolha uma das opções **");
             System.out.println("1 - Temperatura");
             System.out.println("2 - PH");
-            System.out.println("3 - Voltar");
+            System.out.println("9 - Voltar");
             int opcao = scanner.nextInt();
             switch (opcao){
                 case 1:
@@ -70,7 +66,7 @@ public class Tanque {
                     break;
                 case 2:
                     break;
-                case 3:
+                case 9:
                     System.out.println();
                     System.out.println("Voltando...");
                     System.out.println();

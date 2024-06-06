@@ -1,11 +1,12 @@
 package org.amigosdomar.sensores;
 
 import org.amigosdomar.helper.Helper;
-import org.amigosdomar.monitoramento.Tanque;
 
 import java.util.Scanner;
 
 public class Temperatura extends Sensor{
+    Helper helper = new Helper();
+
     public Temperatura(){
         setValorMaximo(50.0);
         setValorMinimo(5.0);
@@ -18,7 +19,6 @@ public class Temperatura extends Sensor{
     }
 
     public void monitorar() {
-        Double temp = getValorAtual();
         if (getValorAtual() >= getValorMaximo() || calcularMedia() >= getValorMaximo()){
             System.out.println();
             System.out.println("A temperatura atingiu a sua máxima ");
@@ -41,8 +41,6 @@ public class Temperatura extends Sensor{
     }
 
     public void menu() {
-
-        Helper helper = new Helper();
 
         boolean continuar = true;
         while (continuar) {
@@ -80,6 +78,9 @@ public class Temperatura extends Sensor{
                     System.out.println();
                     System.out.println("Voltando...");
                     System.out.println();
+                default:
+                    System.out.println("Escolha uma opção válida!");
+                    break;                 
             }
         }
 

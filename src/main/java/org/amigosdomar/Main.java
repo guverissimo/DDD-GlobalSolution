@@ -1,7 +1,5 @@
 package org.amigosdomar;
 
-import java.util.Scanner;
-
 import org.amigosdomar.helper.Helper;
 import org.amigosdomar.monitoramento.Tanque;
 
@@ -40,9 +38,8 @@ public class Main {
                     continuar = false;
                     break;
                 default:
-                    System.out.println();
-                    System.out.println("Escolha uma opção válida!");
-                    System.out.println();
+                    System.out.println("Escolha uma opção válida!"); 
+                    break;   
             }
         }
     }
