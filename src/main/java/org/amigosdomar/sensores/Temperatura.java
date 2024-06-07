@@ -2,6 +2,7 @@ package org.amigosdomar.sensores;
 
 import org.amigosdomar.helper.Helper;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Temperatura extends Sensor{
@@ -19,23 +20,33 @@ public class Temperatura extends Sensor{
     }
 
     public void monitorar() {
-        if (getValorAtual() >= getValorMaximo() || calcularMedia() >= getValorMaximo()){
+        System.out.println("Temperatura: " + getValorAtual());
+        calcularMedia();
+        System.out.println("Temperatura Maxima definida: " + getValorMaximo());
+        System.out.println("Temperatura Minima definida: " + getValorMinimo());
+
+        if (getValorAtual() >= getValorMaximo()){
             System.out.println();
             System.out.println("A temperatura atingiu a sua máxima ");
             System.out.println("Diminuindo a temperatura do tanque");
+            setValorAtual(getValorMaximo()/getValorMinimo());
             System.out.println();
+            return;
         }
 
-        if (getValorAtual() <= getValorMaximo() || calcularMedia() <= getValorMaximo()){
+        if (getValorAtual() <= getValorMaximo() && getValorAtual() >= getValorMinimo()){
             System.out.println();
             System.out.println("A temperatura esta normal");
             System.out.println();
+            return;
         }
 
-        if (getValorAtual() <= getValorMinimo() || calcularMedia() <= getValorMinimo()){
+        if (getValorAtual() <= getValorMinimo()){
             System.out.println();
             System.out.println("A temperatura esta muito abaixo do normal");
+            setValorAtual(getValorMaximo()/getValorMinimo());
             System.out.println("Aumentando a temperatura do tanque");
+            setValorAtual(getValorMaximo()/getValorMinimo());
         }
 
     }
@@ -44,35 +55,62 @@ public class Temperatura extends Sensor{
 
         boolean continuar = true;
         while (continuar) {
-            System.out.println("** Temperatura **");
-            System.out.println("1 - Monitorar");
-            System.out.println("2 - Adicionar Temperatura manual");
-            System.out.println("3 - Alterar Valor Maximo de segurança");
-            System.out.println("4 - Alterar Valor Minimo de segurança");
-            System.out.println("9 - Voltar");
+            helper.imprimeSubtitulo("** Temperatura **");
+            helper.imprimeOpcao("1 - Monitorar");
+            helper.imprimeOpcao("2 - Adicionar Temperatura manual");
+            helper.imprimeOpcao("3 - Alterar Valor Maximo de segurança");
+            helper.imprimeOpcao("4 - Alterar Valor Minimo de segurança");
+            helper.imprimeOpcao("5 - Calcular o valor médio: ");
+            helper.imprimeOpcao("6 - Histórico ");
+            helper.imprimeOpcao("9 - Voltar");
 
-            int op = helper.opcao();
+            System.out.print("Opção: ");
+            int op = helper.opcaoInt();
 
             switch (op) {
                 case 1:
                     monitorar();
                     break;
                 case 2:
-                    Scanner scanner = new Scanner(System.in);
-                    Double temp = scanner.nextDouble();
+                    System.out.println("Temperatura atual: " + getTemperaturaAtual());
+                    System.out.print("Digite a temperatura: ");
+                    Double temp = helper.opcaoDouble();
                     super.adicionarHistorico(temp);
+                    System.out.println("Processado com sucesso!");
+                    System.out.println();
                     break;
                 case 3:
-                    int valorMax = helper.opcao();
-                    setValorMaximo((double) valorMax);
+                    System.out.println("Valor Maximo atual: " + getValorMaximo());
+                    System.out.print("Digite o novo valor maximo: ");
+                    double valorMax = helper.opcaoDouble();
+                    if (valorMax <= getValorMinimo()) {
+                        System.out.println("O valor maximo nao pode ser menor que o valor minimo: "+ getValorMinimo());
+                        return;
+                    }
+
+                    setValorMaximo(valorMax);
                     System.out.println("Valor atualizado");
                     System.out.println();
                     break;
                 case 4:
-                    int valorMin = helper.opcao();
-                    setValorMaximo((double) valorMin);
+                    System.out.println("Valor Minimo atual: " + getValorMinimo());
+                    System.out.print("Digite o novo valor minimo: ");
+                    double valorMin = helper.opcaoDouble();
+
+                    if (valorMin >= getValorMaximo()) {
+                        System.out.println("O valor minimo nao pode ser maior que o valor máximo: "+ getValorMaximo());
+                        return;
+                    }
+
+                    setValorMaximo(valorMin);
                     System.out.println("Valor atualizado");
                     System.out.println();
+                    break;
+                case 5:
+                    calcularMedia();
+                    break;
+                case 6:
+                    imprimeHistorico();
                     break;
                 case 9:
                     System.out.println();

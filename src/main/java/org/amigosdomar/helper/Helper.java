@@ -4,20 +4,28 @@ import java.util.Scanner;
 
 public class Helper {
     Scanner scanner = new Scanner(System.in);
-    public int opcao() {
+    public int opcaoInt() {
         while (!scanner.hasNextInt()) {
-            // Se não for um número inteiro, limpa o buffer do scanner
             scanner.next();
-            // Solicita novamente ao usuário para inserir um número inteiro
             System.out.print("\u001B[31mEntrada inválida. Por favor, digite um número inteiro: \u001B[0m");
         }
         int escolha = scanner.nextInt();
         return escolha;
     }
+    public double opcaoDouble() {
+        while (!scanner.hasNextDouble()) {
+            scanner.next();
+            System.out.print("\u001B[31mEntrada inválida. Por favor, digite um número double. EX: 8,1: \u001B[0m");
+        }
+        String entrada = scanner.next();
+        entrada = entrada.replace(",", ",");
+        double escolha = Double.parseDouble(entrada);
+        return escolha;
+    }
+
+
 
     public void imprimeLogo(){
-        System.out.println();
-        System.out.println();
         System.out.println("\u001B[36m***********************************\u001B[0m");
         System.out.println("\u001B[36m*          Amigos do Mar          *\u001B[0m");
         System.out.println("\u001B[36m***********************************\u001B[0m");
@@ -38,3 +46,5 @@ public class Helper {
         System.out.println("\u001B[34m " + opcao + " \u001B[0m");
     }
 }
+
+

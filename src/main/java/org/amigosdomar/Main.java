@@ -5,7 +5,6 @@ import org.amigosdomar.monitoramento.Tanque;
 
 public class Main {
     public static void main(String[] args) {
-
         Helper helper = new Helper();
         Tanque tanqueNorte = new Tanque("Tanque Norte", 200000.0);
         Tanque tanqueSul = new Tanque("Tanque Sul", 100000.);
@@ -19,7 +18,7 @@ public class Main {
             helper.imprimeOpcao("2 - Tanque Sul");
             helper.imprimeOpcao("9 - Encerrar o programa");
             System.out.print("opção: ");
-            int escolha = helper.opcao();
+            int escolha = helper.opcaoInt();
 
             /*****************************************************************
              * Escolha do tanque - Tanque Norte ou Sul

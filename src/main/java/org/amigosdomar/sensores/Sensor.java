@@ -3,6 +3,8 @@ package org.amigosdomar.sensores;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Random;
 
 public class Sensor {
@@ -11,6 +13,7 @@ public class Sensor {
     private Double valorMinimo;
     private Double valorMaxSim;
     private Double valorAtual;
+
 
     public Double getValorAtual() {
         return valorAtual;
@@ -61,7 +64,6 @@ public class Sensor {
     public Double adicionarHistorico(Double valor){
         historico.add(valor);
         setValorAtual(valor);
-        imprimeHistorico();
         return valor;
     }
 
@@ -74,7 +76,7 @@ public class Sensor {
         }
     }
 
-    public void imprimeHistorico(){
+    public ArrayList<Double> imprimeHistorico(){
 
         LocalTime horaAtual = LocalTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm ");
@@ -86,5 +88,8 @@ public class Sensor {
 
             horaAtual = horaAtual.minusHours(1);
         }
+        Collections.reverse(historico);
+        return historico;
     }
+
 }
